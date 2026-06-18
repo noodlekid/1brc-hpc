@@ -8,4 +8,4 @@ do
     taskset -c 3 ./target/1brc ./test/benchmark_set/measurements1B.txt > /dev/null 2>&1
 done
 
-perf stat -r 5 taskset -c 3 ./target/1brc ./test/benchmark_set/measurements1B.txt > /dev/null
+perf record -F 9997 -g taskset -c 3 ./target/1brc ./test/benchmark_set/measurements1B.txt

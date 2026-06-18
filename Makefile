@@ -1,5 +1,5 @@
 CC ?= cc
-CFLAGS ?= -std=c23 -Wall -Wextra -Wpedantic -g -fno-omit-frame-pointer
+CFLAGS ?= -std=c23 -Wall -Wextra -Wpedantic -g -fno-omit-frame-pointer -mavx2
 OPTLVL ?= -O2
 LDFLAGS ?=
 LDLIBS ?= -lm

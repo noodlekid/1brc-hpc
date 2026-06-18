@@ -1,4 +1,6 @@
 **/measurements*.txt
 compile_commands.json
 perf*
+out.*
 .cache
+target/*
