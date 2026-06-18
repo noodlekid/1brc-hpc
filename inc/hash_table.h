@@ -14,6 +14,7 @@ typedef struct {
   int32_t max; /* tenths */
   int64_t sum; /* tenths */
   int64_t count;
+  uint64_t hash;
   char name[MAX_NAME + 1];
 } entry_t;
 

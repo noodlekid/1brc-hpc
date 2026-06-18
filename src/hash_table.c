@@ -24,6 +24,7 @@ entry_t *lookup_or_insert(const char *name, int len, uint64_t hash) {
       e->name_len = len;
       memcpy(e->name, name, (size_t)len);
       e->name[len] = '\0';
+      e->hash = hash;
       e->min = INT32_MAX;
       e->max = INT32_MIN;
       e->sum = 0;
@@ -31,7 +32,7 @@ entry_t *lookup_or_insert(const char *name, int len, uint64_t hash) {
       entry_count++;
       return e;
     }
-    if (e->name_len == len && memcmp(e->name, name, (size_t)len) == 0) {
+    if (e->name_len == len && e->hash == hash) {
       return e;
     }
     i = (i + 1) & (MAP_CAP - 1);
