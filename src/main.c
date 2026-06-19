@@ -48,7 +48,9 @@ int main(int argc, char **argv) {
   char *lines;
   struct stat buffer;
   fstat(fp, &buffer);
-  lines = (char *)mmap(NULL, buffer.st_size, PROT_READ, MAP_PRIVATE, fp, 0);
+  lines = (char *)mmap(NULL, buffer.st_size, PROT_READ,
+                       MAP_PRIVATE | MAP_POPULATE, fp, 0);
+  // posix_madvise(lines, buffer.st_size, POSIX_MADV_SEQUENTIAL);
   close(fp);
   char *p = lines;
   char *end = lines + buffer.st_size;
