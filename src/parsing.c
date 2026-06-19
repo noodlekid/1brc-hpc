@@ -21,6 +21,19 @@ int32_t parse_tenths(const char *s, int len) {
   return neg ? -v : v;
 }
 
+int16_t parse_tenths_fast(const char *p, size_t len) {
+  int sign = (p[0] == '-');            // 1 if negative, else 0
+  int two = ((int)len - sign == 4);    // 1 if two integer digits
+  int tens = (p[sign] - '0') & (-two); // tens value, or 0 if absent
+  int ones = p[len - 3] - '0';
+  int tenths = p[len - 1] - '0';
+
+  int mag = tens * 100 + ones * 10 + tenths;
+
+  int neg = -sign;                     // 0 or -1
+  return (int16_t)((mag ^ neg) - neg); // negate iff sign set
+}
+
 void parse_line(char *line, line_info_t *line_i) {
   int len = (int)strlen(line);
   while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r')) {

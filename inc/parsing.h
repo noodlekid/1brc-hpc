@@ -11,6 +11,7 @@ typedef struct {
 } line_info_t;
 
 int32_t parse_tenths(const char *s, int len);
+int16_t parse_tenths_fast(const char *p, size_t len);
 void parse_line(char *line, line_info_t *line_i);
 void parse_line_fast(char *start, char *end, line_info_t *line_i);
 const char *find_newline_avx2(const char *data, size_t length);

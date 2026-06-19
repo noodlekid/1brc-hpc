@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
     parse_line_fast(p, (char *)n, &line_info);
 
     // 5. Extract values and update the hash table
-    int32_t t = parse_tenths(line_info.semi + 1, line_info.temp_len);
+    int32_t t = parse_tenths_fast(line_info.semi + 1, line_info.temp_len);
     entry_t *e =
         lookup_or_insert(p, line_info.name_len, fnv1a(p, line_info.name_len));
     update_entry(e, t);
