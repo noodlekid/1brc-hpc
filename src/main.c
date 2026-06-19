@@ -1,6 +1,7 @@
 #define _POSIX_C_SOURCE 200809L
 #include "hash_table.h"
 #include "parsing.h"
+#include "wyhash.h"
 #include <fcntl.h>
 #include <math.h>
 #include <stdint.h>
@@ -69,8 +70,8 @@ int main(int argc, char **argv) {
 
     // 5. Extract values and update the hash table
     int32_t t = parse_tenths_fast(line_info.semi + 1, line_info.temp_len);
-    entry_t *e =
-        lookup_or_insert(p, line_info.name_len, fnv1a(p, line_info.name_len));
+    entry_t *e = lookup_or_insert(p, line_info.name_len,
+                                  wyhash(p, line_info.name_len, 0, _wyp));
     update_entry(e, t);
 
     // 6. Advance 'p' past the newline character to begin the next line
