@@ -3,20 +3,22 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <assert.h>
 
 #define MAP_CAP (1u << 14)
 #define MAX_NAME 128
 
 typedef struct {
-  int used;
-  int name_len;
-  int32_t min; /* tenths of a degree */
-  int32_t max; /* tenths */
+  uint64_t hash;
   int64_t sum; /* tenths */
   int64_t count;
-  uint64_t hash;
-  char name[MAX_NAME + 1];
+  int32_t min; /* tenths of a degree */
+  int32_t max; /* tenths */
+  char* name; /* pointer to name in mmap buffer */
+  uint8_t used;
+  uint8_t name_len;
 } entry_t;
+
 
 typedef struct {
   size_t size;

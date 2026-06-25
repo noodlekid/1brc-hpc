@@ -20,7 +20,12 @@ extern uint32_t entry_count;
 static int cmp_entry(const void *pa, const void *pb) {
   const entry_t *a = *(entry_t *const *)pa;
   const entry_t *b = *(entry_t *const *)pb;
-  return strcmp(a->name, b->name);
+  int min_len = (a->name_len < b->name_len) ?  a->name_len : b->name_len;
+  int result = memcmp(a->name, b->name, min_len);
+  if (result == 0) {
+    return a->name_len - b->name_len;
+  }
+  return result;
 }
 
 /* Java's Math.round: half-up toward +infinity. */
@@ -94,7 +99,7 @@ int main(int argc, char **argv) {
     format_tenths(maxs, sizeof maxs, (double)e->max);
     if (i > 0)
       fputs(", ", stdout);
-    printf("%s=%s/%s/%s", e->name, mins, means, maxs);
+    printf("%.*s=%s/%s/%s", e->name_len, e->name, mins, means, maxs);
   }
   fputs("}\n", stdout);
   // output -------------------------------------------------------------

@@ -1,12 +1,12 @@
 CC ?= cc
-CFLAGS ?= -std=c23 -Wall -Wextra -Wpedantic -g -fno-omit-frame-pointer -mavx2
+CFLAGS ?= -std=c2x -Wall -Wextra -Wpedantic -g -fno-omit-frame-pointer -mavx2 -Wpadded
 OPTLVL ?= -O3
 LDFLAGS ?=
 LDLIBS ?= -lm
 
 SRCDIR := ./src
 OUTDIR := ./target
-OUT := $(OUTDIR)/1brc
+OUT := $(OUTDIR)/1brc.out
 
 C_SRCS += $(SRCDIR)/main.c \
 		  $(SRCDIR)/parsing.c \

@@ -22,8 +22,7 @@ entry_t *lookup_or_insert(const char *name, int len, uint64_t hash) {
     if (!e->used) {
       e->used = 1;
       e->name_len = len;
-      memcpy(e->name, name, (size_t)len);
-      e->name[len] = '\0';
+      e->name = name;
       e->hash = hash;
       e->min = INT32_MAX;
       e->max = INT32_MIN;
